@@ -42,13 +42,24 @@ pipeline {
             }
         }
 
+        stage("Install dependencies (npm)") {
+            steps {
+                dir('frontend') {
+                    sh 'npm install'
+                }
+                dir('backend') {
+                    sh 'npm install'
+                }
+            }
+        }
+
         stage("OWASP: Dependency check") {
             steps {
                 sh '''
                 echo "Running OWASP Dependency Check..."
                 /opt/dependency-check/bin/dependency-check.sh \
                 --project DP-Check \
-                --scan . \
+                --scan ./frontend --scan ./backend \
                 --data /tmp/owasp-data
                 '''
             }
