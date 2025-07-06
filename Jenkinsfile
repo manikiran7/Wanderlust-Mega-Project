@@ -46,7 +46,7 @@ pipeline {
             steps {
                 sh '''
                 echo "Running OWASP Dependency Check..."
-                dependency-check.sh --project DP-Check --scan .
+                /opt/dependency-check/bin/dependency-check.sh --project DP-Check --scan .
                 '''
             }
         }
