@@ -43,13 +43,15 @@ pipeline {
             }
         }
 
-        stage("Install dependencies (npm)") {
+       stage("Install dependencies (npm)") {
             steps {
-                dir('frontend') {
+                    withEnv(["PATH+NODE=${NODEJS_HOME}/bin"]) {
+                    dir('frontend') {
                     sh 'npm install'
-                }
-                dir('backend') {
+                    }
+                    dir('backend') {
                     sh 'npm install'
+                    }
                 }
             }
         }
