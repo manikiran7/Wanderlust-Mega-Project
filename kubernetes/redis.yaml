@@ -1,43 +1,28 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: redis-deployment
-  namespace: wonder
-  labels:
-    app: redis
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: redis
-  template:
-    metadata:
-      name: redis
-      labels:
-        app: redis
-    spec:
-      containers:
-        - name: redis
-          image: redis
-          ports:
-            - containerPort: 6379
-          volumeMounts:
-            - name: redis-storage
-              mountPath: /data
-      volumes:
-        - name: redis-storage
-          persistentVolumeClaim:
-            claimName: redis-pvc
----
+# redis-pv.yaml
 apiVersion: v1
-kind: Service
+kind: PersistentVolume
 metadata:
-  name: redis-service
+  name: redis-pv
   namespace: wonder
 spec:
-  selector:
-    app: redis
-  ports:
-    - port: 6379
-      targetPort: 6379
-      protocol: TCP
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /data/redis
+---
+# redis-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-pvc
+  namespace: wonder
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 1Gi
