@@ -6,7 +6,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: ""
+  storageClassName: ""  # Optional, only needed to match empty storageClass PV
   resources:
     requests:
       storage: 5Gi
