@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         SONAR_HOME = tool "SonarScanner"
+        NODEJS_HOME = tool "node23"
     }
 
     parameters {
