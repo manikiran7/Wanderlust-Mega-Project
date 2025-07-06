@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongo-deployment
-  namespace: wanderlust
+  namespace: wonder
   labels:
     app: mongo
 spec:
