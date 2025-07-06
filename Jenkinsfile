@@ -63,7 +63,7 @@ pipeline {
                 /opt/dependency-check/bin/dependency-check.sh \
                 --project DP-Check \
                 --scan ./frontend --scan ./backend \
-                --data /tmp/owasp-data
+                --data /tmp/owasp-data \
                 --disableYarnAudit
                 '''
             }
